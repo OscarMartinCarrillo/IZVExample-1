@@ -29,15 +29,102 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+ext {
+    def coroutinesVersion = '1.3.5'
+    def retrofitVersion = '2.8.1'
+    def okhttpVersion = '3.14.7'
+    def gsonVersion = '2.8.6'
+    def junitVersion = '4.12'
+    def mockkVersion = '1.10.0'
+    def appCompatVersion = '1.1.0'
+    def recyclerviewVersion = '1.1.0'
+    def koinVersion = '2.0.1'
+    def lifecycleVersion = '2.2.0'
+
+    def androidxTestVersion = "1.2.0"
+
+    def junitXVersion = "1.1.0"
+
+    def archVersion = "2.0.0"
+
+    def ktxVersion = "1.3.1"
+    def espressoVersion = "3.2.0"
+
+    coroutines = [
+            core   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutinesVersion}",
+            android: "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutinesVersion}",
+            test   : "org.jetbrains.kotlinx:kotlinx-coroutines-test:${coroutinesVersion}"
+    ]
+
+    retrofit = [
+            runtime: "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            gson   : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            mock   : "com.squareup.retrofit2:retrofit-mock:${retrofitVersion}",
+            scalars: "com.squareup.retrofit2:converter-scalars:${retrofitVersion}"
+    ]
+
+    okhttp = [
+            okhttp       : "com.squareup.okhttp3:okhttp:${okhttpVersion}",
+            interceptor  : "com.squareup.okhttp3:logging-interceptor:${okhttpVersion}",
+            mockWebServer: "com.squareup.okhttp3:mockwebserver:${okhttpVersion}"
+    ]
+
+    gson = [
+            gson: "com.google.code.gson:gson:${gsonVersion}"
+    ]
+
+    junit = [
+            junit : "junit:junit:${junitVersion}",
+            junitX: "androidx.test.ext:junit:${junitXVersion}"
+    ]
+
+    mockk = [
+            mockk: "io.mockk:mockk:${mockkVersion}"
+    ]
+
+    support = [
+            appCompat         : "androidx.appcompat:appcompat:${appCompatVersion}",
+            recyclerview      : "androidx.recyclerview:recyclerview:${recyclerviewVersion}",
+            lifecycleViewModel: "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycleVersion}",
+            ktx               : "androidx.core:core-ktx:${ktxVersion}"
+    ]
+
+    koin = [
+            viewModel: "org.koin:koin-android-viewmodel:${koinVersion}",
+            android  : "org.koin:koin-android:${koinVersion}",
+            core     : "org.koin:koin-core:${koinVersion}",
+            test     : "org.koin:koin-test:${koinVersion}",
+            ext      : "org.koin:koin-android-ext:${koinVersion}"
+    ]
 }
 
 dependencies {
-
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
+
+    implementation(
+            coroutines.core,
+            coroutines.android,
+            support.appCompat,
+            support.recyclerview,
+            support.lifecycleViewModel,
+            support.ktx,
+            retrofit.gson,
+            okhttp.interceptor,
+            koin.viewModel,
+            koin.core,
+            koin.android
+    )
+
     testImplementation 'junit:junit:4.+'
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }
