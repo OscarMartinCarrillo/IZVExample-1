@@ -9,9 +9,9 @@ class GetIncidenceUseCase(
 ) {
     private val sampleEntries = listOf(
         IncidenceEntry("Granada", 0f),
-        IncidenceEntry("Armilla", 10f),
+        IncidenceEntry("Armilla", 150f),
         IncidenceEntry("Albolote", 580f),
-        IncidenceEntry("Las Gabias", 20f),
+        IncidenceEntry("Las Gabias", 320f),
         IncidenceEntry("Cullar Vega", 15f)
     )
 

@@ -2,6 +2,8 @@ package es.voghdev.izvexample
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import es.voghdev.izvexample.databinding.ActivityIncidenceBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
@@ -15,6 +17,7 @@ class IncidenceActivity : AppCompatActivity() {
     private val binding: ActivityIncidenceBinding by lazy {
         ActivityIncidenceBinding.inflate(layoutInflater)
     }
+    private lateinit var incidenceAdapter: IncidenceAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +30,8 @@ class IncidenceActivity : AppCompatActivity() {
                     binding.textView.text = "Loading"
                 }
                 is IncidenceViewModel.State.Loaded -> {
-                    binding.textView.text = "${state.items.count()} items"
+                    binding.textView.text = ""
+                    setupIncidenceList(state.items)
                 }
                 is IncidenceViewModel.State.Error -> {
                     binding.textView.text = "Error: ${state.error.message}"
@@ -37,6 +41,15 @@ class IncidenceActivity : AppCompatActivity() {
 
         coroutineScope.launch {
             viewModel.initialState()
+        }
+    }
+
+        private fun setupIncidenceList(entries: List<IncidenceViewModel.Item>) {
+        incidenceAdapter = IncidenceAdapter(entries)
+        binding.recyclerView.apply {
+            layoutManager = LinearLayoutManager(this@IncidenceActivity, RecyclerView.VERTICAL, false)
+            adapter = incidenceAdapter
+            isNestedScrollingEnabled = false
         }
     }
 }
