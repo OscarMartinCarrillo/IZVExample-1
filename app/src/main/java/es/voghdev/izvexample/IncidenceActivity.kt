@@ -1,7 +1,7 @@
 package es.voghdev.izvexample
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import es.voghdev.izvexample.databinding.ActivityIncidenceBinding
@@ -44,7 +44,7 @@ class IncidenceActivity : AppCompatActivity() {
         }
     }
 
-        private fun setupIncidenceList(entries: List<IncidenceViewModel.Item>) {
+    private fun setupIncidenceList(entries: List<IncidenceViewModel.Item>) {
         incidenceAdapter = IncidenceAdapter(entries)
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(this@IncidenceActivity, RecyclerView.VERTICAL, false)

@@ -15,7 +15,7 @@ class GetIncidenceUseCase(
         IncidenceEntry("Cullar Vega", 15f)
     )
 
-    operator suspend  fun invoke(): List<IncidenceEntry> {
+    suspend operator fun invoke(): List<IncidenceEntry> {
         withContext(Dispatchers.IO) {
             Thread.sleep(3000)
         }
